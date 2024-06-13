@@ -8,9 +8,7 @@ const Header: React.FC = () => {
       <ul className='main-menu'>
         <li className='main-item'><a className='main-link' href="/">View</a></li>
         <li className='main-item'><a className='main-link' href="/create">Create</a></li>
-        <li className='main-item'><a className='main-link' aria-disabled href="/import">Import</a></li>
       </ul>
-    
     </header>
   );
 };

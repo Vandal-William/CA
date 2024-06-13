@@ -24,6 +24,7 @@
     "@editorjs/simple-image": "^1.6.0",
     "@editorjs/table": "^2.3.0",
     "@editorjs/warning": "^1.4.0",
+    "axios": "^1.7.2",
     "pdfjs-dist": "^4.3.136",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -4,7 +4,7 @@ import Editor from '../Editor/Editor';
 import './style.css'
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
-import ImportPage from '../ImportPage/ImportPage';
+import Oneview from '../OneView/Oneview';
 
 const App: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const App: React.FC = () => {
           
           <Route path="/" Component={HomePage} />
           <Route path="/create" Component={Editor} />
-          <Route path="/import" Component={ImportPage} />
+          <Route path="/publications/:id" Component={Oneview} />
 
         </Routes>
       </main>
