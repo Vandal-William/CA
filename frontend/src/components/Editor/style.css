@@ -1,0 +1,30 @@
+.sub-menu-pdf{
+    display:flex;
+    justify-content: space-between; 
+    align-items:center; 
+    padding:5px;
+    margin-top: 5%;
+    width:60%;
+}
+
+.sub-menu_button{
+    display: flex;
+    gap:10px
+}
+
+.link-button{
+    list-style-type: none;
+    padding: 10px;
+    background-color: lightgreen;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.title-input{
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+.input-file{
+    display: none;
+}

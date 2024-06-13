@@ -1,0 +1,32 @@
+
+body {
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style pour la scrollbar dans WebKit */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 5clpx;
+}
+
+::-webkit-scrollbar-track {
+  background: lightgreen;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightgreen;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: lightgreen;
+}
+
+/* Style pour la scrollbar dans Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: lightgreen transparent;
+}

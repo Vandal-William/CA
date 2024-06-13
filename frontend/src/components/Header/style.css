@@ -1,0 +1,22 @@
+.header{
+    padding: 3px 30px 3px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: lightblue;
+}
+
+.main-menu{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.main-item{
+    list-style-type: none;
+}
+
+.main-link{
+    text-decoration: none;
+    color: black;
+}
