@@ -1,4 +1,6 @@
 export class CreatePublicationDto {
+  readonly title: string;
+  readonly cover?: string;
   readonly time: number;
   readonly blocks: {
     id: string;

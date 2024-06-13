@@ -97,8 +97,14 @@ class Block {
   tunes?: BlockTunes;
 }
 
-@Schema()
+@Schema({ collection: 'publications' })
 export class Publication extends Document {
+  @Prop({ type: String, required: true })
+  title: string;
+
+  @Prop({ type: String })
+  cover: string;
+
   @Prop({ type: Number, required: true })
   time: number;
 

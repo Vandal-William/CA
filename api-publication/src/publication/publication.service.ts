@@ -7,7 +7,8 @@ import { CreatePublicationDto } from './dto/create-publication.dto';
 @Injectable()
 export class PublicationService {
   constructor(
-    @InjectModel(Publication.name) private publicationModel: Model<Publication>,
+    @InjectModel(Publication.name)
+    private publicationModel: Model<Publication>,
   ) {}
 
   async create(

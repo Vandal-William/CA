@@ -1,13 +1,27 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module';
 import { PublicationService } from '../src/publication/publication.service';
+import mongoose from 'mongoose';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
 
+  // Connexion à la base de données MongoDB
+  await mongoose.connect(
+    'mongodb+srv://attitude:attitude@ca.u9zede9.mongodb.net/attitudes',
+    {
+      //useNewUrlParser: true,
+      //useUnifiedTopology: true,
+      //useCreateIndex: true,
+      //useFindAndModify: false,
+    },
+  );
+
   const publicationService = app.get(PublicationService);
 
   const publicationData = {
+    title: 'Publication test 1',
+    cover: null,
     time: Date.now(),
     blocks: [
       {
@@ -127,9 +141,33 @@ async function bootstrap() {
     ],
   };
 
-  await publicationService.create(publicationData);
+  try {
+    // Vérifier si la collection publications existe
+    const collections = await mongoose.connection.db
+      .listCollections()
+      .toArray();
+    const collectionExists = collections.some(
+      (coll) => coll.name === 'publications',
+    );
 
-  await app.close();
+    // Si la collection existe, la supprimer
+    if (collectionExists) {
+      await mongoose.connection.db.dropCollection('publications');
+      console.log('Collection "publications" supprimée.');
+    }
+
+    // Insérer les données dans la collection
+    await publicationService.create(publicationData);
+    console.log('Données de publication insérées avec succès.');
+  } catch (error) {
+    console.error(
+      "Erreur lors de l'insertion des données de publication :",
+      error,
+    );
+  } finally {
+    // Fermer l'application NestJS
+    await app.close();
+  }
 }
 
 bootstrap();
