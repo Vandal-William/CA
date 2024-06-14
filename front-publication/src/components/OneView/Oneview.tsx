@@ -56,7 +56,7 @@ const Oneview: React.FC = () => {
         <h3>{data.title}</h3>
         <img src={data.cover} alt="Publication cover" className="sidebar-image" />
         <div className="sidebar-footer">
-          <button className="btn btn-edit">Edit</button>
+          <a href={`/publications/update/${data._id}`} className="btn btn-edit">Edit</a>
           <button onClick={handleDelete} className="btn btn-delete">Delete</button>
         </div>
       </div>
@@ -125,7 +125,7 @@ const renderAttaches = (block: any) => {
 const renderImage = (block: any) => {
   return (
     <figure>
-      <img className="image" src={block.data.file.url} alt={block.data.caption} />
+      <img className="image" src={block.data.url} alt={block.data.caption} />
       {block.data.caption && <figcaption>{block.data.caption}</figcaption>}
     </figure>
   );

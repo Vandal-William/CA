@@ -37,8 +37,10 @@ const publication = {
     }
   },
 
-  update: async (id: string, publicationData: PublicationData) => {
+  update: async (id: string, publicationData: PublicationData, title: string, cover: string) => {
     try {
+      publicationData.title = title;
+      publicationData.cover = cover;
       const response = await axios.put(`${BASE_URL}/publications/${id}`, publicationData);
       return response.data;
     } catch (error) {
@@ -57,23 +59,23 @@ const publication = {
     }
   },
 
-  uploadFile: async (file: File): Promise<string> => {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
+  // uploadFile: async (file: File): Promise<string> => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('file', file);
   
-      const response = await axios.post(`${BASE_URL}/publications/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+  //     const response = await axios.post(`${BASE_URL}/publications/upload`, formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     });
 
-      return response.data.path;
-    } catch (error) {
-      console.error('Erreur lors de l\'envoi du fichier :', error);
-      throw error;
-    }
-  },
+  //     return response.data.path;
+  //   } catch (error) {
+  //     console.error('Erreur lors de l\'envoi du fichier :', error);
+  //     throw error;
+  //   }
+  // },
 }
 
 export default publication;

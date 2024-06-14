@@ -1,0 +1,93 @@
+.unsplash-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 95vh;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    padding: 20px;
+    z-index: 1000;
+  }
+  
+  .unsplash-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .unsplash-title {
+    font-size: 24px;
+    color: #111;
+  }
+  
+  .unsplash-close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .unsplash-search-bar {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .unsplash-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+  }
+  
+  .unsplash-search-button {
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  .unsplash-search-button:hover {
+    background-color: #005bb5;
+  }
+  
+  .unsplash-loader {
+    margin: 20px auto;
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #0073e6;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .unsplash-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .unsplash-image-item {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    transition: transform 0.3s;
+  }
+  
+  .unsplash-image-item:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  

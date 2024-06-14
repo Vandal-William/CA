@@ -13,13 +13,15 @@ import LinkTool from '@editorjs/link';
 import PrintTemplate from '../PrintTemplate/PrintTemplate';
 import PreviewModal from '../PreviewModal/PreviewModal';
 import publication from '../../selectors/publication';
+import UnsplashModal from '../UnsplashModal/UnsplashModal';
 
 const Editor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<EditorJS | null>(null);
   const [data, setData] = useState<any>();
   const [title, setTitle] = useState<string>('');
-  const [cover, setCover] = useState<File | null>(null);
+  const [cover, setCover] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const editor = new EditorJS({
@@ -82,13 +84,10 @@ const Editor: React.FC = () => {
   }, []);
 
   const handleClickSave = async() => {
-    let filePath;
+    //let filePath;
     if(data && title){
-      if(cover){
-        filePath = await publication.uploadFile(cover);
-        console.log(filePath);
-        publication.create(data, title, filePath);
-      }
+      // filePath = await publication.uploadFile(cover);
+      publication.create(data, title, cover);
     }
   };
 
@@ -110,15 +109,17 @@ const Editor: React.FC = () => {
   };
 
   const handleCoverChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setCover(event.target.files[0]);
-    }
+    setCover(event.target.value);
+    // if (event.target.files && event.target.files.length > 0) {
+    //   setCover(event.target.files[0]);
+    // }
   };
+
 
   return (
     <div className='editor-container'>
       <div className='editor-side-panel'>
-        <h2 className='panel-title'>Publication Details</h2>
+        <h2 className='panel-title'>Create a publication</h2>
         <input
           className='title-input'
           type="text"
@@ -127,14 +128,20 @@ const Editor: React.FC = () => {
           placeholder="Enter a publication's title"
         />
         <ul className='sub-menu_button'>
-          <input onChange={handleCoverChange} className='input-file' type="file" id="file-input"/>
-          <label className='link-button' htmlFor="file-input">Choose a publication's cover</label>
+          {/* <input onChange={handleCoverChange} className='input-file' type="file" id="file-input"/>
+          <label className='link-button' htmlFor="file-input">Choose a publication's cover</label> */}
+          <input onChange={handleCoverChange} value={cover} className='title-input' type="text" placeholder="Link of unsplash's cover" readOnly/>
+          <button onClick={() => setIsModalOpen(true)} className='link-button'>Search cover in Unsplash</button>
           <li onClick={handleClickSave} className='link-button'>Save</li>
           <li onClick={handlePrint} className='link-button'>Print</li>
         </ul>
       </div>
       <div id="editorjs" className="editorjs" />
       <PreviewModal data={data} previewRef={previewRef}/>
+      {isModalOpen && <UnsplashModal onClose={() => setIsModalOpen(false)} onSelect={(path) => {
+        setCover(path);
+        setIsModalOpen(false);
+      }} />}
     </div>
   );
 };

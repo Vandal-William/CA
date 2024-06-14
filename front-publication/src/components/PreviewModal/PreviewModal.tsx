@@ -87,9 +87,10 @@ const renderAttaches = (block: any) => {
 };
 
 const renderImage = (block: any) => {
+  console.log(block)
   return (
     <figure>
-      <img style={{ width: '100%' }} src={block.data.file.url} alt={block.data.caption} />
+      <img style={{ width: '100%' }} src={block.data.url} alt={block.data.caption} />
       {block.data.caption && <figcaption>{block.data.caption}</figcaption>}
     </figure>
   );
