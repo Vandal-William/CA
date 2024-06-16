@@ -14,6 +14,8 @@ import PrintTemplate from '../PrintTemplate/PrintTemplate';
 import PreviewModal from '../PreviewModal/PreviewModal';
 import publication from '../../selectors/publication';
 import UnsplashModal from '../UnsplashModal/UnsplashModal';
+import category from '../../selectors/category';
+import CategoryData from '../../interface/CategoryData';
 
 const Editor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -22,6 +24,23 @@ const Editor: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [cover, setCover] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [categories, setCategories] = useState<CategoryData[]>();
+  const [cat, setCat] = useState<string>('');
+  const [summary, setSummary] = useState<string>('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await category.fetchAll();
+        setCategories(result);
+        
+      } catch (error) {
+        console.error('Erreur lors de la récupération de la publication :', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const editor = new EditorJS({
@@ -84,10 +103,8 @@ const Editor: React.FC = () => {
   }, []);
 
   const handleClickSave = async() => {
-    //let filePath;
-    if(data && title){
-      // filePath = await publication.uploadFile(cover);
-      publication.create(data, title, cover);
+    if(data && title && cat){
+      publication.create(data, title, cover, summary, cat);
     }
   };
 
@@ -110,9 +127,14 @@ const Editor: React.FC = () => {
 
   const handleCoverChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCover(event.target.value);
-    // if (event.target.files && event.target.files.length > 0) {
-    //   setCover(event.target.files[0]);
-    // }
+  };
+
+  const handleChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCat(event.target.value);
+  };
+
+  const handleChangeSummary = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSummary(event.target.value);
   };
 
 
@@ -128,8 +150,13 @@ const Editor: React.FC = () => {
           placeholder="Enter a publication's title"
         />
         <ul className='sub-menu_button'>
-          {/* <input onChange={handleCoverChange} className='input-file' type="file" id="file-input"/>
-          <label className='link-button' htmlFor="file-input">Choose a publication's cover</label> */}
+          <textarea name="summary" onChange={handleChangeSummary} value={summary} placeholder="write a publication's summary" className='summary-input'></textarea>
+          <select onChange={handleChangeCategory} value={cat} className='category-select' name="categories">
+            <option value="choose">Choose a category</option>
+            {categories?.map((category) => (
+              <option key={category._id} value={category._id}>{category.name}</option>
+            ))}
+          </select>
           <input onChange={handleCoverChange} value={cover} className='title-input' type="text" placeholder="Link of unsplash's cover" readOnly/>
           <button onClick={() => setIsModalOpen(true)} className='link-button'>Search cover in Unsplash</button>
           <li onClick={handleClickSave} className='link-button'>Save</li>

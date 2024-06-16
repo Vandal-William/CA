@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PublicationData from '../../interface/PublicationData';
 import publication from '../../selectors/publication';
+import category from '../../selectors/category';
 import './style.css';
 
 const Oneview: React.FC = () => {
@@ -10,13 +11,16 @@ const Oneview: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<PublicationData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [categoryName, setCategoryName] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (id) {
           const result = await publication.fetchOne(id);
+          const categoryName = await category.fetchOne(result.categoryId);
           setData(result);
+          setCategoryName(categoryName.name);
         }
       } catch (error) {
         console.error('Erreur lors de la récupération de la publication :', error);
@@ -53,8 +57,12 @@ const Oneview: React.FC = () => {
         ))}
       </div>
       <div className="sidebar">
-        <h3>{data.title}</h3>
+        <div className='header-publication'>
+          <span className='category-publication'>{categoryName}</span>
+          <h3>{data.title}</h3>
+        </div>
         <img src={data.cover} alt="Publication cover" className="sidebar-image" />
+        <p className='summary-publication'>{data.summary}</p>
         <div className="sidebar-footer">
           <a href={`/publications/update/${data._id}`} className="btn btn-edit">Edit</a>
           <button onClick={handleDelete} className="btn btn-delete">Delete</button>

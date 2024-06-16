@@ -5,6 +5,16 @@ const BASE_URL = 'http://127.0.0.1:3000';
 
 const publication = {
 
+  search: async (serchTerm: string , categoryId: string): Promise<PublicationData[]> => {
+    try {
+      const response = await axios.post(`${BASE_URL}/publications/search`, {term: serchTerm, id: categoryId});
+      return response.data;
+    } catch (error) {
+      console.error('Erreur lors de la récupération des publications :', error);
+      throw error;
+    }
+  },
+
   fetchAll: async (): Promise<PublicationData[]> => {
     try {
       const response = await axios.get(`${BASE_URL}/publications`);
@@ -25,10 +35,12 @@ const publication = {
     }
   },
 
-  create: async (publicationData: PublicationData, title: string , cover: string | undefined) => {
+  create: async (publicationData: PublicationData, title: string , cover: string | undefined, summary: string, cat: string) => {
     try {
       publicationData.title = title;
       publicationData.cover = cover;
+      publicationData.summary = summary;
+      publicationData.categoryId = cat;
       const response = await axios.post(`${BASE_URL}/publications`, publicationData);
       return response.data;
     } catch (error) {
@@ -37,10 +49,12 @@ const publication = {
     }
   },
 
-  update: async (id: string, publicationData: PublicationData, title: string, cover: string) => {
+  update: async (id: string, publicationData: PublicationData, title: string, cover: string, summary: string, cat: string) => {
     try {
       publicationData.title = title;
       publicationData.cover = cover;
+      publicationData.summary = summary;
+      publicationData.categoryId = cat;
       const response = await axios.put(`${BASE_URL}/publications/${id}`, publicationData);
       return response.data;
     } catch (error) {
@@ -58,24 +72,6 @@ const publication = {
       throw error;
     }
   },
-
-  // uploadFile: async (file: File): Promise<string> => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-  
-  //     const response = await axios.post(`${BASE_URL}/publications/upload`, formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     });
-
-  //     return response.data.path;
-  //   } catch (error) {
-  //     console.error('Erreur lors de l\'envoi du fichier :', error);
-  //     throw error;
-  //   }
-  // },
 }
 
 export default publication;

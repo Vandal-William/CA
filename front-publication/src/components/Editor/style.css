@@ -1,13 +1,5 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
   
-  .editor-container {
+.editor-container {
     display: flex;
     width: 90%;
     height: 82vh;
@@ -34,6 +26,25 @@ body {
   
   .title-input {
     width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .summary-input{
+    width: calc(100% - 20px);
+    height: 20vh;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: none;
+  }
+
+  .category-select{
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;

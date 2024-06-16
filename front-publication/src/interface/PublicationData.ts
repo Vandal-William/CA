@@ -2,6 +2,8 @@ interface PublicationData {
   _id: string;
   title: string;
   cover?: string;
+  categoryId: string;
+  summary?: string;
   readonly time: number;
   readonly blocks: {
     id: string;

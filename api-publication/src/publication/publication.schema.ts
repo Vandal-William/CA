@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
 class BlockTunes {
   @Prop({ type: [String] })
@@ -104,6 +104,16 @@ export class Publication extends Document {
 
   @Prop({ type: String })
   cover: string;
+
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+  })
+  categoryId: MongooseSchema.Types.ObjectId;
+
+  @Prop({ type: String })
+  summary: string;
 
   @Prop({ type: Number, required: true })
   time: number;

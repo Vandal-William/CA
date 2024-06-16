@@ -16,6 +16,8 @@ import PreviewModal from '../PreviewModal/PreviewModal';
 import publication from '../../selectors/publication';
 import UnsplashModal from '../UnsplashModal/UnsplashModal';
 import { useParams } from 'react-router-dom';
+import category from '../../selectors/category';
+import CategoryData from '../../interface/CategoryData';
 
 const UpdateEditor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -26,15 +28,23 @@ const UpdateEditor: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [categories, setCategories] = useState<CategoryData[]>();
+  const [cat, setCat] = useState<string>('');
+  const [summary, setSummary] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (id) {
           const result = await publication.fetchOne(id);
+          const allCategories = await category.fetchAll();
+          const oneCategory = await category.fetchOne(result.categoryId)
+          setCategories(allCategories);
+          setCat(oneCategory.name)
           setData(result);
           setTitle(result.title);
           setCover(result.cover);
+          setSummary(result.summary);
         }
       } catch (error) {
         console.error('Erreur lors de la récupération de la publication :', error);
@@ -120,7 +130,7 @@ const UpdateEditor: React.FC = () => {
 
   const handleClickSave = async () => {
     if (data && id) {
-      publication.update(id, data, title, cover);
+      publication.update(id, data, title, cover, summary, cat);
     }
   };
 
@@ -145,6 +155,15 @@ const UpdateEditor: React.FC = () => {
     setCover(event.target.value);
   };
 
+  const handleChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCat(event.target.value);
+  };
+
+  const handleChangeSummary = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSummary(event.target.value);
+  };
+
+
   return (
     <div className='editor-container'>
       <div className='editor-side-panel'>
@@ -157,6 +176,13 @@ const UpdateEditor: React.FC = () => {
           placeholder="Enter a publication's title"
         />
         <ul className='sub-menu_button'>
+          <textarea name="summary" onChange={handleChangeSummary} value={summary} placeholder="write a publication's summary" className='summary-input'></textarea>
+          <select onChange={handleChangeCategory} value={cat} className='category-select' name="categories">
+            <option value="choose">Choose a category</option>
+            {categories?.map((category) => (
+              <option key={category._id} value={category._id}>{category.name}</option>
+            ))}
+          </select>
           <input onChange={handleCoverChange} value={cover} className='title-input' type="text" placeholder="Link of unsplash's cover" readOnly />
           <button onClick={() => setIsModalOpen(true)} className='link-button'>Change cover in Unsplash</button>
           <li onClick={handleClickSave} className='link-button'>Update</li>

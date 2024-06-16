@@ -9,6 +9,8 @@ import {
 } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
+import { SearchPublicationDto } from './dto/search.dto';
+import { Publication } from './publication.schema';
 
 @Controller('publications')
 export class PublicationController {
@@ -22,6 +24,13 @@ export class PublicationController {
   @Get()
   findAll() {
     return this.publicationService.findAll();
+  }
+
+  @Post('search')
+  async searchPublications(
+    @Body() searchParams: SearchPublicationDto,
+  ): Promise<Publication[]> {
+    return this.publicationService.findSearchPublication(searchParams);
   }
 
   @Get(':id')
