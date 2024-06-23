@@ -1,5 +1,6 @@
 import axios from 'axios';
-import CategoryData from '../interface/CategoryData';
+import {CategoryData, CreateCategoryData} from '../../interface/publication/CategoryData';
+
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
@@ -25,7 +26,7 @@ const category = {
     }
   },
 
-  create: async (CategoryData: CategoryData) => {
+  create: async (CategoryData: CreateCategoryData) => {
     try {
       const response = await axios.post(`${BASE_URL}/categories`, CategoryData);
       return response.data;

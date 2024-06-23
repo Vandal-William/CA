@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import PublicationData from '../../interface/PublicationData';
-import publication from '../../selectors/publication';
-import category from '../../selectors/category';
+import PublicationData from '../../../interface/publication/PublicationData';
+import publication from '../../../selectors/publication/publication';
+import category from '../../../selectors/publication/category';
 import './style.css';
 
 const Oneview: React.FC = () => {
@@ -43,7 +43,7 @@ const Oneview: React.FC = () => {
   const handleDelete = async() => {
     if(id){
       await publication.delete(id);
-      navigate('/');
+      navigate('/publications/views');
     }
   }
 

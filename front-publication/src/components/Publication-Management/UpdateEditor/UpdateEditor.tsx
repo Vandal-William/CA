@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import './style.css';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
@@ -13,11 +12,11 @@ import Checklist from '@editorjs/checklist';
 import LinkTool from '@editorjs/link';
 import PrintTemplate from '../PrintTemplate/PrintTemplate';
 import PreviewModal from '../PreviewModal/PreviewModal';
-import publication from '../../selectors/publication';
+import publication from '../../../selectors/publication/publication';
 import UnsplashModal from '../UnsplashModal/UnsplashModal';
 import { useParams } from 'react-router-dom';
-import category from '../../selectors/category';
-import CategoryData from '../../interface/CategoryData';
+import category from '../../../selectors/publication/category';
+import CategoryData from '../../../interface/publication/CategoryData';
 
 const UpdateEditor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -29,7 +28,7 @@ const UpdateEditor: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState<boolean>(true);
   const [categories, setCategories] = useState<CategoryData[]>();
-  const [cat, setCat] = useState<string>('');
+  const [cat, setCat] = useState<CategoryData>();
   const [summary, setSummary] = useState<string>('');
 
   useEffect(() => {
@@ -39,8 +38,10 @@ const UpdateEditor: React.FC = () => {
           const result = await publication.fetchOne(id);
           const allCategories = await category.fetchAll();
           const oneCategory = await category.fetchOne(result.categoryId)
-          setCategories(allCategories);
-          setCat(oneCategory.name)
+          const finalCategoriesArray = allCategories.filter(category => category._id !== oneCategory._id);
+          console.log('finalyData : ', finalCategoriesArray)
+          setCategories(finalCategoriesArray);
+          setCat(oneCategory)
           setData(result);
           setTitle(result.title);
           setCover(result.cover);
@@ -129,8 +130,8 @@ const UpdateEditor: React.FC = () => {
   }
 
   const handleClickSave = async () => {
-    if (data && id) {
-      publication.update(id, data, title, cover, summary, cat);
+    if (data && id && cat) {
+      publication.update(id, data, title, cover, summary, cat._id);
     }
   };
 
@@ -155,8 +156,19 @@ const UpdateEditor: React.FC = () => {
     setCover(event.target.value);
   };
 
-  const handleChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCat(event.target.value);
+  const handleChangeCategory = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+
+    if (categories){
+      const selectedCategory = categories.find(category => category._id === event.target.value);
+      const allCategories = await category.fetchAll();
+      if(selectedCategory){
+        const finalCategoriesArray = allCategories.filter(category => category._id !== selectedCategory._id);
+        setCategories(finalCategoriesArray);
+      }
+      setCat(selectedCategory);
+
+    }
+
   };
 
   const handleChangeSummary = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -165,6 +177,8 @@ const UpdateEditor: React.FC = () => {
 
 
   return (
+    <>
+    <a className='return-link' href="/publications/views"> Back to publications</a>
     <div className='editor-container'>
       <div className='editor-side-panel'>
         <h2 className='panel-title'>Update a publication</h2>
@@ -177,8 +191,8 @@ const UpdateEditor: React.FC = () => {
         />
         <ul className='sub-menu_button'>
           <textarea name="summary" onChange={handleChangeSummary} value={summary} placeholder="write a publication's summary" className='summary-input'></textarea>
-          <select onChange={handleChangeCategory} value={cat} className='category-select' name="categories">
-            <option value="choose">Choose a category</option>
+          <select onChange={handleChangeCategory} className='category-select' name="categories">
+            <option value={ cat ? cat._id : ''}>{cat ? cat.name : ''}</option>
             {categories?.map((category) => (
               <option key={category._id} value={category._id}>{category.name}</option>
             ))}
@@ -196,6 +210,7 @@ const UpdateEditor: React.FC = () => {
         setIsModalOpen(false);
       }} />}
     </div>
+    </>
   );
 };
 

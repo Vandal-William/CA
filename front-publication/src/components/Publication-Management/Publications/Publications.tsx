@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
-import publication from '../../selectors/publication';
-import PublicationData from '../../interface/PublicationData';
+import publication from '../../../selectors/publication/publication';
+import PublicationData from '../../../interface/publication/PublicationData';
 import Card from '../Card/Card';
-import category from '../../selectors/category';
-import CategoryData from '../../interface/CategoryData';
+import category from '../../../selectors/publication/category';
+import {CategoryData} from '../../../interface/publication/CategoryData';
 
-const HomePage: React.FC = () => {
+const Publications: React.FC = () => {
   const [data, setData] = useState<PublicationData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -81,21 +81,23 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="homePage">
+    <>
+    <a className='return-link' href="/publications"> Back to menu</a>
+    <div className="publications">
       <div className='cards'>
         <div className="pagination">
           <button onClick={() => paginate(1)} disabled={currentPage === 1}>
-            Première
+            First
           </button>
           <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-            Précédent
+            Preview
           </button>
           {renderPageButtons()}
           <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
-            Suivant
+            Next
           </button>
           <button onClick={() => paginate(totalPages)} disabled={currentPage === totalPages}>
-            Dernière
+            Last
           </button>
         </div>
 
@@ -128,7 +130,8 @@ const HomePage: React.FC = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
-export default HomePage;
+export default Publications;

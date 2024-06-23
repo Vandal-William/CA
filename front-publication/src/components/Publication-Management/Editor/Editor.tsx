@@ -10,12 +10,12 @@ import Paragraph from '@editorjs/paragraph';
 import Quote from '@editorjs/quote';
 import Checklist from '@editorjs/checklist';
 import LinkTool from '@editorjs/link';
-import PrintTemplate from '../PrintTemplate/PrintTemplate';
-import PreviewModal from '../PreviewModal/PreviewModal';
-import publication from '../../selectors/publication';
+import PrintTemplate from '../../Publication-Management/PrintTemplate/PrintTemplate';
+import PreviewModal from '../../Publication-Management/PreviewModal/PreviewModal';
+import publication from '../../../selectors/publication/publication';
 import UnsplashModal from '../UnsplashModal/UnsplashModal';
-import category from '../../selectors/category';
-import CategoryData from '../../interface/CategoryData';
+import category from '../../../selectors/publication/category';
+import {CategoryData} from '../../../interface/publication/CategoryData';
 
 const Editor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -139,6 +139,8 @@ const Editor: React.FC = () => {
 
 
   return (
+    <>
+    <a className='return-link' href="/publications"> Back to menu </a>
     <div className='editor-container'>
       <div className='editor-side-panel'>
         <h2 className='panel-title'>Create a publication</h2>
@@ -170,6 +172,7 @@ const Editor: React.FC = () => {
         setIsModalOpen(false);
       }} />}
     </div>
+    </>
   );
 };
 
