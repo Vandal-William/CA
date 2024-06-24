@@ -48,6 +48,8 @@ const Oneview: React.FC = () => {
   }
 
   return (
+    <>
+    <a className='return-link' href="/publications/views"> Back to publication </a>
     <div className="oneview-container">
       <div className="oneview-content">
         {data.blocks.map((block: any) => (
@@ -69,6 +71,7 @@ const Oneview: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

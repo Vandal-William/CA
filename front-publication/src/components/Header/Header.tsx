@@ -9,7 +9,7 @@ const Header: React.FC = () => {
         <li className='main-item'><a className='main-link' href="/">Dashboard</a></li>
         <li className='main-item'><a className='main-link' href="/publications">Publications</a></li>
         <li className='main-item'><a className='main-link' href="/categories">Categories</a></li>
-        <li className='main-item'><a className='main-link' href="#">Subscriptions</a></li>
+        <li className='main-item'><a className='main-link' href="/subscriptions">Subscriptions</a></li>
         <li className='main-item'><a className='main-link' href="#">Comments</a></li>
       </ul>
     </header>

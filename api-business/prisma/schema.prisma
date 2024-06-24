@@ -72,7 +72,7 @@ model UserSubscription {
 model Benefit {
   id           String       @id @default(uuid())
   description  String
-  subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
   subscriptionId String
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt

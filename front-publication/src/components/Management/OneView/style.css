@@ -1,9 +1,8 @@
 
 .oneview-container {
     display: flex;
-    max-width: 1200px;
+    width: 90%;
     height: 80vh;
-    margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;

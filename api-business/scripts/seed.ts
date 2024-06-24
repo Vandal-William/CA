@@ -9,6 +9,7 @@ async function truncateTables() {
   await prisma.$executeRaw`TRUNCATE TABLE "TempComment" CASCADE;`;
   await prisma.$executeRaw`TRUNCATE TABLE "Revenue" CASCADE;`;
   await prisma.$executeRaw`TRUNCATE TABLE "UserSubscription" CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Benefit" CASCADE;`;
 }
 
 // IDs des publications spécifiques
@@ -42,7 +43,7 @@ async function main() {
       users.push(user);
     }
 
-    // Créer 4 abonnements
+    // Créer 4 abonnements et leurs benefits
     const subscriptions = [];
     for (let i = 0; i < 4; i++) {
       const subscription = await prisma.subscription.create({
@@ -53,6 +54,16 @@ async function main() {
         },
       });
       subscriptions.push(subscription);
+
+      // Créer 5 benefits pour chaque subscription
+      for (let j = 0; j < 5; j++) {
+        await prisma.benefit.create({
+          data: {
+            description: faker.commerce.productAdjective(),
+            subscriptionId: subscription.id,
+          },
+        });
+      }
     }
 
     // Créer 40 commentaires

@@ -32,7 +32,12 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+.form-container{
+  position: absolute;
+  top: 12vh;
+  width: 80%;
 
+}
 .form-container,
 .category-card {
   display: flex;
