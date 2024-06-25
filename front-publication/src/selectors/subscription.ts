@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SubscriptionData, SubscriptionCreateData  } from '../../interface/publication/SubscriptionData';
+import { SubscriptionData, SubscriptionCreateData  } from '../interface/SubscriptionData';
 
 
 const BASE_URL = 'http://127.0.0.1:3001';

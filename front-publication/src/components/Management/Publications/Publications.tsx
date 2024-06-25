@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
-import publication from '../../../selectors/publication/publication';
-import PublicationData from '../../../interface/publication/PublicationData';
+import publication from '../../../selectors/publication';
+import PublicationData from '../../../interface/PublicationData';
 import Card from '../Card/Card';
-import category from '../../../selectors/publication/category';
-import {CategoryData} from '../../../interface/publication/CategoryData';
+import category from '../../../selectors/category';
+import {CategoryData} from '../../../interface/CategoryData';
 
 const Publications: React.FC = () => {
   const [data, setData] = useState<PublicationData[]>([]);

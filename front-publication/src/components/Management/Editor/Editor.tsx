@@ -12,10 +12,10 @@ import Checklist from '@editorjs/checklist';
 import LinkTool from '@editorjs/link';
 import PrintTemplate from '../../Management/PrintTemplate/PrintTemplate';
 import PreviewModal from '../../Management/PreviewModal/PreviewModal';
-import publication from '../../../selectors/publication/publication';
+import publication from '../../../selectors/publication';
 import UnsplashModal from '../UnsplashModal/UnsplashModal';
-import category from '../../../selectors/publication/category';
-import {CategoryData} from '../../../interface/publication/CategoryData';
+import category from '../../../selectors/category';
+import {CategoryData} from '../../../interface/CategoryData';
 
 const Editor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);

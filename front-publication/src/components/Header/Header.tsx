@@ -1,7 +1,13 @@
 import React from 'react';
+import { TempCommentData } from '../../interface/TempCommentData';
 import './style.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  tempComments: TempCommentData[];
+}
+
+const Header: React.FC<HeaderProps> = ({ tempComments }) => {
+  
   return (
     <header className="header">
       <h1 className='main-title'>Site Management</h1>
@@ -10,7 +16,7 @@ const Header: React.FC = () => {
         <li className='main-item'><a className='main-link' href="/publications">Publications</a></li>
         <li className='main-item'><a className='main-link' href="/categories">Categories</a></li>
         <li className='main-item'><a className='main-link' href="/subscriptions">Subscriptions</a></li>
-        <li className='main-item'><a className='main-link' href="#">Comments</a></li>
+        <li className='main-item'><a className='main-link' href="/temp-comments">Comments</a>(<span>{tempComments ? tempComments.length : '0'}</span>)</li>
       </ul>
     </header>
   );

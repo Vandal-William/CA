@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import UnsplashData from '../../interface/publication/UnsplashData';
+import UnsplashData from '../interface/UnsplashData';
 
 const BASE_URL: string = 'https://api.unsplash.com';
 const API_KEY: string = '&client_id=KVGJaA1GCV8mTD7_cawChrGmZTddCMwX1QbftQd4jxc';

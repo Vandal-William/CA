@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CategoryData, CreateCategoryData} from '../../interface/publication/CategoryData';
+import {CategoryData, CreateCategoryData} from '../interface/CategoryData';
 
 
 const BASE_URL = 'http://127.0.0.1:3000';

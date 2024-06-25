@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BenefitData, BenefitCreateData } from '../../interface/publication/BenefitData';
+import { BenefitData, BenefitCreateData } from '../interface/BenefitData';
 
 
 const BASE_URL = 'http://127.0.0.1:3001';

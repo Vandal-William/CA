@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import category from '../../../selectors/publication/category';
-import { CategoryData, CreateCategoryData } from '../../../interface/publication/CategoryData';
+import category from '../../../selectors/category';
+import { CategoryData, CreateCategoryData } from '../../../interface/CategoryData';
 import './style.css';
 
 const CategoryManager: React.FC = () => {

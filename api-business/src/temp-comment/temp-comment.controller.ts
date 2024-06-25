@@ -19,7 +19,7 @@ export class TempCommentController {
   @Get()
   async findAll(): Promise<TempComment[]> {
     return this.tempCommentService.findAll();
-  }
+  } //
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<TempComment | null> {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
-import UnsplashData from '../../../interface/publication/UnsplashData';
-import Unsplash from '../../../selectors/publication/unsplashApi';
+import UnsplashData from '../../../interface/UnsplashData';
+import Unsplash from '../../../selectors/unsplashApi';
 
 interface UnsplashModalProps {
   onClose: () => void;

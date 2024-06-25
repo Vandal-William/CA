@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { SubscriptionData, SubscriptionCreateData } from '../../../interface/publication/SubscriptionData';
-import { BenefitData, BenefitCreateData } from '../../../interface/publication/BenefitData';
-import subscription from '../../../selectors/publication/subscription';
-import benefitFunction from '../../../selectors/publication/benefit';
+import { SubscriptionData, SubscriptionCreateData } from '../../../interface/SubscriptionData';
+import { BenefitData, BenefitCreateData } from '../../../interface/BenefitData';
+import subscription from '../../../selectors/subscription';
+import benefitFunction from '../../../selectors/benefit';
 import './style.css';
 
 const Subscriptions: React.FC = () => {

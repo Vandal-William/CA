@@ -1,5 +1,5 @@
 import axios from 'axios';
-import PublicationData from '../../interface/publication/PublicationData';
+import PublicationData from '../interface/PublicationData';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
