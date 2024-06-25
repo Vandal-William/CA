@@ -32,7 +32,7 @@ async function main() {
 
     // Créer 40 utilisateurs
     const users = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 1500; i++) {
       const user = await prisma.user.create({
         data: {
           name: faker.name.fullName(),
@@ -48,7 +48,7 @@ async function main() {
     for (let i = 0; i < 4; i++) {
       const subscription = await prisma.subscription.create({
         data: {
-          name: faker.commerce.productName(),
+          name: faker.commerce.productAdjective(),
           description: faker.commerce.productDescription(),
           amount: generateRandomAmount(),
         },
@@ -83,7 +83,7 @@ async function main() {
     // Créer 40 revenus avec des dates en 2023
     const startDate = new Date('2023-01-01');
     const endDate = new Date('2024-05-29');
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 3000; i++) {
       const subscription = subscriptions[i % subscriptions.length]; // Répéter les montants des abonnements
       const date = faker.date.between(startDate, endDate);
       await prisma.revenue.create({
@@ -95,7 +95,7 @@ async function main() {
     }
 
     // Créer 40 liaisons utilisateur-abonnement
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 1500; i++) {
       const status = faker.helpers.arrayElement([
         SubscriptionStatus.Active,
         SubscriptionStatus.Inactive,
@@ -114,7 +114,7 @@ async function main() {
       await prisma.userSubscription.create({
         data: {
           userId: users[i % users.length].id,
-          subscriptionId: subscriptions[i % subscriptions.length].id,
+          subscriptionId: faker.helpers.arrayElement(subscriptions).id,
           status,
           reason,
         },

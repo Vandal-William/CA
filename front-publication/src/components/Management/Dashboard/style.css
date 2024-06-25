@@ -1,0 +1,62 @@
+.dashboard{
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    overflow: auto;
+    padding: 15px;
+    width: 90%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 20px;
+
+}
+
+.flex{
+    display: flex;
+    
+    gap: 5px;
+}
+
+.other{
+    padding-left: 10px;
+    align-items: baseline;
+}
+.unique{
+    flex-direction: column;
+}
+
+.dashboard-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    height: 15vh;
+    padding: 10px;
+    width: 15%;
+}
+
+
+.dashboard-subscription-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    width: 88%;
+    height: 15vh;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.revenus-select{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 5px;
+}
