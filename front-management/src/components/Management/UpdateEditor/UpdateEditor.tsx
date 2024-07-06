@@ -16,7 +16,7 @@ import publication from '../../../selectors/publication';
 import UnsplashModal from '../UnsplashModal/UnsplashModal';
 import { useParams } from 'react-router-dom';
 import category from '../../../selectors/category';
-import CategoryData from '../../../interface/CategoryData';
+import {CategoryData} from '../../../interface/CategoryData';
 
 const UpdateEditor: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
