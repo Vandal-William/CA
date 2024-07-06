@@ -47,9 +47,9 @@ copy_package_json "$SOURCE_DIR/api-publication" "$DEST_API_PUBLICATION"
 
 # Redémarrer les applications avec PM2
 cd $DEST_API_BUSINESS/src
-npm install
+sudo npm install
 pm2 restart main.js --name api-business || pm2 start main.js --name api-business
 
 cd $DEST_API_PUBLICATION/src
-npm install
+sudo npm install
 pm2 restart main.js --name api-publication || pm2 start main.js --name api-publication
