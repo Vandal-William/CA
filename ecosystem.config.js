@@ -18,15 +18,6 @@ module.exports = {
           NODE_ENV: 'production'
         }
       },
-      {
-        name: 'front-management',
-        script: 'server.js',
-        cwd: '/var/www/front-management',
-        watch: true,
-        env: {
-          NODE_ENV: 'production'
-        }
-      }
     ],
     deploy: {
       production: {
