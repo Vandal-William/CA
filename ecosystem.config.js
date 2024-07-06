@@ -35,7 +35,6 @@ module.exports = {
         ref: 'origin/main',
         repo: 'https://github.com/Vandal-William/CA.git',
         path: '/home/ubuntu/management',
-        'pre-deploy': 'rm -rf /home/ubuntu/management',
         'post-deploy': 'chmod +x ./deploy.sh && ./deploy.sh && pm2 reload ecosystem.config.js --env production'
       }
     }
