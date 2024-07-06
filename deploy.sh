@@ -36,7 +36,7 @@ sudo cp -r $SOURCE_DIR/front-management/dist/* $DEST_FRONT_MANAGEMENT/
 copy_package_json() {
   local source_dir=$1
   local dest_dir=$2
-  cp $source_dir/package.json $dest_dir/package.json
+  sudo cp $source_dir/package.json $dest_dir/package.json
 }
 
 # Copier le package.json de l'API Business
