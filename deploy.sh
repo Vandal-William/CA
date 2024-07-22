@@ -48,6 +48,7 @@ copy_package_json "$SOURCE_DIR/api-publication" "$DEST_API_PUBLICATION"
 # Redémarrer les applications avec PM2
 cd $DEST_API_BUSINESS/src
 sudo npm install
+sudo prisma generate
 pm2 restart main.js --name api-business || pm2 start main.js --name api-business
 
 cd $DEST_API_PUBLICATION/src

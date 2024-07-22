@@ -1,8 +1,8 @@
 import axios from 'axios';
 import PublicationData from '../interface/PublicationData';
 
-const BASE_URL = 'http://127.0.0.1:3000';
-
+const BASE_URL = 'http://changezdattitudes.com:3000';
+// http://127.0.0.1:3000/publications
 const publication = {
 
   search: async (serchTerm: string , categoryId: string): Promise<PublicationData[]> => {
